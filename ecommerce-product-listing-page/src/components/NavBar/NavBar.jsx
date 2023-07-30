@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const NavBar = () => {
   return (<>
 
-<Flex as='nav' minWidth='max-content' gap='5' padding='2rem' backgroundColor='gray.100' position='sticky' width='100%' top='0'>
+<Flex as='nav' minWidth='max-content' gap='5' padding='2rem' backgroundColor='gray.100' position='sticky' width='100%' top='0' zIndex='1'>
     <Heading size='lg'>My Shop</Heading>
     <Spacer/>
   <ButtonGroup >

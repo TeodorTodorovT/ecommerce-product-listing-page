@@ -1,7 +1,18 @@
+import { useContext, useEffect } from "react";
+import {ProductsContext} from "../App";
+import ProductGrid from "../components/ProductGrid/ProductGrid";
 
-const ShoesPLP = () => {
+// eslint-disable-next-line react/prop-types
+const ShoesPLP = ({setLoadedPage}) => {
+  const shoes = useContext(ProductsContext);
+  useEffect(() =>{
+    setLoadedPage(3);
+  }, [])
+  
+
+
     return (
-      <div>ShoesPLP</div>
+      <ProductGrid products={shoes} />
     )
   }
   
