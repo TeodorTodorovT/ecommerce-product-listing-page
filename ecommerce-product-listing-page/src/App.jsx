@@ -13,14 +13,14 @@ export const ProductsContext = createContext();
 function App() {
   const [products, setProducts] = useState();
   const [loadedProducts, setLoadedProducts] = useState();
-  const [loadedProductsNumber, setLoadedProductsNumber] = useState(20);
+  const [loadedProductsNumber, setLoadedProductsNumber] = useState(10);
   const [loadedPage, setLoadedPage] = useState(1);
   const [loadMoreDisabled, setLoadMoreDisabled] = useState(false);
 
   useEffect(() =>{
       api.getProducts(loadedPage).then((res) => {
         setProducts(res.data)
-        setLoadedProducts(res.data.slice(0,20))
+        setLoadedProducts(res.data.slice(0,10))
       })
   },[loadedPage]);
 
@@ -36,7 +36,7 @@ function App() {
   },[products, loadedProducts])
 
   const loadMoreHandler = () =>{
-    setLoadedProductsNumber(current => current + 20)
+    setLoadedProductsNumber(current => current + 10)
   }
   console.log(products);
 
@@ -49,9 +49,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/clothes" />} />
           
-            <Route path="/clothes" element={<ClothesPLP setLoadedPage={setLoadedPage}/>} />
+            <Route path="/clothes" element={<ClothesPLP setLoadedPage={setLoadedPage} setLoadedProductsNumber={setLoadedProductsNumber}/>}/>
          
-          <Route path="/shoes" element={<ShoesPLP setLoadedPage={setLoadedPage}/>} />
+          <Route path="/shoes" element={<ShoesPLP setLoadedPage={setLoadedPage} setLoadedProductsNumber={setLoadedProductsNumber}/>} />
         </Routes>
         </ProductsContext.Provider>
         <LoadMore loadMoreHandler={loadMoreHandler} loadMoreDisabled={loadMoreDisabled}/>

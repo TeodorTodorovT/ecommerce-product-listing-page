@@ -4,10 +4,11 @@ import ProductGrid from "../components/ProductGrid/ProductGrid";
 
 
 // eslint-disable-next-line react/prop-types
-const ClothesPLP = ({setLoadedPage}) => {
+const ClothesPLP = ({setLoadedPage, setLoadedProductsNumber}) => {
   const clothes = useContext(ProductsContext);
   useEffect(() =>{
     setLoadedPage(1);
+    setLoadedProductsNumber(10);
   }, [])
 
 
