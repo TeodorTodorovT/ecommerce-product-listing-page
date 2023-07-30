@@ -2,12 +2,12 @@
 import { Grid, GridItem, Spinner, Flex } from "@chakra-ui/react";
 import ProductCard from "../ProductCard/ProductCard";
 
-const ProductGrid = ({ products }) => {
+const ProductGrid = ({ products, toggleAlert }) => {
         return ( products ? <Grid templateColumns="repeat(4, 1fr)" gap="6">
         {products.map((product) => {    
             return(
             <GridItem key={product.id}>
-                <ProductCard product={product}/>
+                <ProductCard product={product} toggleAlert={toggleAlert}/>
             </GridItem>
           )
         })}
