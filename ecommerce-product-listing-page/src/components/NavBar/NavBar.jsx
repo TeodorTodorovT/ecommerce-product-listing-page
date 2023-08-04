@@ -16,13 +16,13 @@ const NavBar = () => {
         top="0"
         zIndex="1"
       >
-        <Heading size="lg">My Shop</Heading>
+        <Heading size="lg" color="blue.600"><Link to={`clothes`}>My Shop</Link></Heading>
         <Spacer />
-        <ButtonGroup display={{ base: "none", md: "flex" }}>
-          <Button colorScheme="blackAlpha" variant="ghost" size="lg">
+        <ButtonGroup display={{ base: "none", md: "flex" }} gap="2rem">
+          <Button colorScheme="black" variant="link" size="lg">
             <Link to={`clothes`}>Clothes</Link>
           </Button>
-          <Button colorScheme="blackAlpha" variant="ghost" size="lg">
+          <Button colorScheme="black" variant="link" size="lg">
             <Link to={`shoes`}>Shoes</Link>
           </Button>
         </ButtonGroup>
@@ -37,9 +37,9 @@ const NavBar = () => {
           />
           <MenuList display={{ md: "none" }}>
             <MenuItem>
-              <Link to={`clothes`} width="100px">Clothes</Link>
+              <Link to={`clothes`}>Clothes</Link>
             </MenuItem>
-            <MenuItem >
+            <MenuItem>
             <Link to={`shoes`}>Shoes</Link>
             </MenuItem>
           </MenuList>

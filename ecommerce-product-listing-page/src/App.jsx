@@ -11,6 +11,7 @@ import ProductCounter from './components/ProductCounter/ProductCounter';
 import ProductHeading from './components/ProductHeading/ProductHeading';
 import CartAddedSuccess from './components/CartAddedSuccess/CartAddedSuccess';
 import SortProducts from './components/SortProducts/SortProducts';
+import Footer from './components/Footer/Footer';
 
 export const ProductsContext = createContext();
 
@@ -75,6 +76,7 @@ function App() {
   console.log("rerender");
 
   return (
+    <>
     <BrowserRouter>
       <NavBar />
       <Flex>
@@ -95,6 +97,8 @@ function App() {
         </ProductsContext.Provider>
         <LoadMore loadMoreHandler={loadMoreHandler} loadMoreDisabled={loadMoreDisabled}/>
       </BrowserRouter>
+      <Footer/>
+      </>
   )
 }
 
