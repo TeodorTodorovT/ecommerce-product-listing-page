@@ -2,7 +2,7 @@
 import { Card, CardBody, CardFooter, Image, Heading, Text, Divider, ButtonGroup, Button, Stack } from '@chakra-ui/react'
 
 const ProductCard = ({product, toggleAlert}) => {
-  console.log(product);
+
   return (
 <Card maxW='sm'>
   <CardBody>

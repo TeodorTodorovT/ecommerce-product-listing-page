@@ -2,7 +2,6 @@ import { Flex, Text } from "@chakra-ui/react";
 
 // eslint-disable-next-line react/prop-types
 const ProductHeading = ({pageName}) => {
-    console.log(pageName);
   return (
     <Flex margin='1rem'>
         <Text as='h2' fontSize="6xl">{pageName}</Text>

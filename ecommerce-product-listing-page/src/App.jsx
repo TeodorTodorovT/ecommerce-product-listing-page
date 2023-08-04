@@ -10,6 +10,7 @@ import LoadMore from './components/LoadMore/LoadMore';
 import ProductCounter from './components/ProductCounter/ProductCounter';
 import ProductHeading from './components/ProductHeading/ProductHeading';
 import CartAddedSuccess from './components/CartAddedSuccess/CartAddedSuccess';
+import SortProducts from './components/SortProducts/SortProducts';
 
 export const ProductsContext = createContext();
 
@@ -20,11 +21,12 @@ const pages = {
 
 function App() {
   const [products, setProducts] = useState();
-  const [loadedProducts, setLoadedProducts] = useState();
+  const [loadedProducts, setLoadedProducts] = useState([]);
   const [loadedProductsNumber, setLoadedProductsNumber] = useState(10);
   const [loadedPage, setLoadedPage] = useState(1);
   const [loadMoreDisabled, setLoadMoreDisabled] = useState(false);
   const [alertIsShown, setAlertIsShown] = useState(false);
+  const [sortMethod, setSortMethod] = useState('Alphabetical a-z');
 
   useEffect(() =>{
       api.getProducts(loadedPage).then((res) => {
@@ -41,8 +43,22 @@ function App() {
   useEffect(() => {
     if(products?.length <= loadedProducts?.length){
       setLoadMoreDisabled(true);
+    }else {
+      setLoadMoreDisabled(false);
     }
   },[products, loadedProducts])
+
+  useEffect(() => {
+    if(sortMethod === 'Alphabetical a-z'){
+      setLoadedProducts(currentProducts => currentProducts ? [...currentProducts].sort((a,b) => a.title.localeCompare(b.title)) : [])
+    }else if(sortMethod === 'Alphabetical z-a'){
+      setLoadedProducts(currentProducts => currentProducts ? [...currentProducts].sort((a,b) => b.title.localeCompare(a.title)) : [])
+    }else if(sortMethod === 'Price ascending'){
+      setLoadedProducts(currentProducts => currentProducts ? [...currentProducts].sort((a,b) => a.price - b.price) : [])
+    }else if(sortMethod === 'Price descending'){
+      setLoadedProducts(currentProducts => currentProducts ? [...currentProducts].sort((a,b) => b.price - a.price) : [])
+    }
+  }, [sortMethod, loadedProductsNumber])
 
   const loadMoreHandler = () =>{
     setLoadedProductsNumber(current => current + 10)
@@ -52,7 +68,11 @@ function App() {
     setAlertIsShown(!alertIsShown)
   }
    
+  const sortHandler = (e) =>{
+    setSortMethod(e.target.textContent)
+  }
 
+  console.log("rerender");
 
   return (
     <BrowserRouter>
@@ -61,6 +81,9 @@ function App() {
         <ProductHeading pageName={pages[loadedPage]} />
         <Spacer />
         <ProductCounter products={products?.length} loadedProducts={loadedProducts?.length} />
+      </Flex>
+      <Flex margin='1rem' justifyContent='right'>
+        <SortProducts sortHandler={sortHandler}/>
       </Flex>
       <CartAddedSuccess alertIsShown={alertIsShown} toggleAlert={toggleAlert}/>
       <ProductsContext.Provider value={loadedProducts}>
