@@ -16,7 +16,7 @@ const NavBar = () => {
         top="0"
         zIndex="1"
       >
-        <Heading size="lg" color="blue.600"><Link to={`clothes`}>My Shop</Link></Heading>
+        <Heading size="lg" color="blue.600"><Link to={`electronics`}>My Shop</Link></Heading>
         <Spacer />
         <ButtonGroup display={{ base: "none", md: "flex" }} gap="2rem">
           <Button colorScheme="black" variant="link" size="lg">

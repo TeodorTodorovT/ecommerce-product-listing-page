@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
-import { Card, CardBody, CardFooter, Image, Heading, Text, Divider, ButtonGroup, Button, Stack } from '@chakra-ui/react'
+import { Card, CardBody, CardFooter, Image, Heading, Text, Divider, ButtonGroup, Button, Stack, Box } from '@chakra-ui/react'
+
+import { StarIcon } from '@chakra-ui/icons'
 
 const ProductCard = ({product, toggleAlert}) => {
 
@@ -14,6 +16,19 @@ const ProductCard = ({product, toggleAlert}) => {
     <Stack mt='6' spacing='3'>
       <Heading size='md'>{product.title}</Heading>
       <Text>{product.description}</Text>
+      <Box display='flex' mt='2' alignItems='center'>
+          {Array(5)
+            .fill('')
+            .map((_, i) => (
+              <StarIcon
+                key={i}
+                color={i < product.rating.rate ? 'blue.500' : 'gray.300'}
+              />
+            ))}
+          <Box as='span' ml='2' color='gray.600' fontSize='sm'>
+            {product.rating.count} reviews
+          </Box>
+        </Box>
       <Text color='blue.600' fontSize='2xl'>
         ${product.price}
       </Text>
