@@ -20,10 +20,10 @@ const NavBar = () => {
         <Spacer />
         <ButtonGroup display={{ base: "none", md: "flex" }} gap="2rem">
           <Button colorScheme="black" variant="link" size="lg">
-            <Link to={`clothes`}>Clothes</Link>
+            <Link to={`electronics`}>Electronics</Link>
           </Button>
           <Button colorScheme="black" variant="link" size="lg">
-            <Link to={`shoes`}>Shoes</Link>
+            <Link to={`jewelry`}>Jewelry</Link>
           </Button>
         </ButtonGroup>
         
@@ -37,10 +37,10 @@ const NavBar = () => {
           />
           <MenuList display={{ md: "none" }}>
             <MenuItem>
-              <Link to={`clothes`}>Clothes</Link>
+              <Link to={`electronics`}>Electronics</Link>
             </MenuItem>
             <MenuItem>
-            <Link to={`shoes`}>Shoes</Link>
+              <Link to={`jewelry`}>Jewelry</Link>
             </MenuItem>
           </MenuList>
         </Menu>

@@ -4,8 +4,8 @@ import api from './services/api'
 import NavBar from "./components/NavBar/NavBar"
 import { Flex, Spacer } from '@chakra-ui/react'
 
-import ClothesPLP from "./pages/ClothesPLP";
-import ShoesPLP from "./pages/ShoesPLP";
+import ElectronicsPLP from "./pages/ElectronicsPLP";
+import JewelryPLP from "./pages/JewelryPLP";
 import LoadMore from './components/LoadMore/LoadMore';
 import ProductCounter from './components/ProductCounter/ProductCounter';
 import ProductHeading from './components/ProductHeading/ProductHeading';
@@ -15,30 +15,25 @@ import Footer from './components/Footer/Footer';
 
 export const ProductsContext = createContext();
 
-const pages = {
-  1: "Clothes",
-  3: "Shoes"
-}
-
 function App() {
   const [products, setProducts] = useState();
   const [loadedProducts, setLoadedProducts] = useState([]);
-  const [loadedProductsNumber, setLoadedProductsNumber] = useState(10);
-  const [loadedPage, setLoadedPage] = useState(1);
+  const [loadedProductsNumber, setLoadedProductsNumber] = useState(4);
+  const [loadedPage, setLoadedPage] = useState("Electronics");
   const [loadMoreDisabled, setLoadMoreDisabled] = useState(false);
   const [alertIsShown, setAlertIsShown] = useState(false);
-  const [sortMethod, setSortMethod] = useState('Alphabetical a-z');
+  const [sortMethod, setSortMethod] = useState('');
 
   useEffect(() =>{
       api.getProducts(loadedPage).then((res) => {
-        setProducts(res.data)
-        setLoadedProducts(res.data.slice(0,10))
+        setProducts(res)
+        setLoadedProducts(res.slice(0,4))
       })
   },[loadedPage]);
 
   useEffect(() =>{
     setLoadedProducts(products?.slice(0, loadedProductsNumber))
-
+    console.log(loadedProductsNumber);
   },[products, loadedProductsNumber])
 
   useEffect(() => {
@@ -62,7 +57,7 @@ function App() {
   }, [sortMethod, loadedProductsNumber])
 
   const loadMoreHandler = () =>{
-    setLoadedProductsNumber(current => current + 10)
+    setLoadedProductsNumber(current => current + 4)
   }
 
   const toggleAlert = () => {
@@ -73,14 +68,12 @@ function App() {
     setSortMethod(e.target.textContent)
   }
 
-  console.log("rerender");
-
   return (
     <>
     <BrowserRouter>
       <NavBar />
       <Flex>
-        <ProductHeading pageName={pages[loadedPage]} />
+        <ProductHeading pageName={loadedPage} />
         <Spacer />
         <ProductCounter products={products?.length} loadedProducts={loadedProducts?.length} />
       </Flex>
@@ -90,9 +83,9 @@ function App() {
       <CartAddedSuccess alertIsShown={alertIsShown} toggleAlert={toggleAlert}/>
       <ProductsContext.Provider value={loadedProducts}>
         <Routes>
-          <Route path="/" element={<Navigate to="/clothes" />} />        
-            <Route path="/clothes" element={<ClothesPLP setLoadedPage={setLoadedPage} setLoadedProductsNumber={setLoadedProductsNumber} toggleAlert={toggleAlert}/>}/>    
-          <Route path="/shoes" element={<ShoesPLP setLoadedPage={setLoadedPage} setLoadedProductsNumber={setLoadedProductsNumber} toggleAlert={toggleAlert}/>} />
+          <Route path="/" element={<Navigate to="/electronics" />} />        
+            <Route path="/electronics" element={<ElectronicsPLP setLoadedPage={setLoadedPage} setLoadedProductsNumber={setLoadedProductsNumber} toggleAlert={toggleAlert}/>}/>    
+          <Route path="/jewelry" element={<JewelryPLP setLoadedPage={setLoadedPage} setLoadedProductsNumber={setLoadedProductsNumber} toggleAlert={toggleAlert}/>} />
         </Routes>
         </ProductsContext.Provider>
         <LoadMore loadMoreHandler={loadMoreHandler} loadMoreDisabled={loadMoreDisabled}/>

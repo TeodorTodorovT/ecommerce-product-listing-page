@@ -7,7 +7,7 @@ const ProductCard = ({product, toggleAlert}) => {
 <Card maxW='sm'>
   <CardBody>
     <Image
-      src={product.images[0]}
+      src={product.image}
       alt='Green double couch with wooden legs'
       borderRadius='lg'
     />
