@@ -33,7 +33,6 @@ function App() {
 
   useEffect(() =>{
     setLoadedProducts(products?.slice(0, loadedProductsNumber))
-    console.log(loadedProductsNumber);
   },[products, loadedProductsNumber])
 
   useEffect(() => {
@@ -61,7 +60,10 @@ function App() {
   }
 
   const toggleAlert = () => {
-    setAlertIsShown(!alertIsShown)
+    setAlertIsShown(true)
+    setTimeout(() => {
+      setAlertIsShown(false);
+    }, 3000)
   }
    
   const sortHandler = (e) =>{
@@ -72,6 +74,7 @@ function App() {
     <>
     <BrowserRouter>
       <NavBar />
+      <CartAddedSuccess alertIsShown={alertIsShown} toggleAlert={toggleAlert}/>
       <Flex>
         <ProductHeading pageName={loadedPage} />
         <Spacer />
@@ -80,7 +83,7 @@ function App() {
       <Flex margin='1rem' justifyContent='right'>
         <SortProducts sortHandler={sortHandler}/>
       </Flex>
-      <CartAddedSuccess alertIsShown={alertIsShown} toggleAlert={toggleAlert}/>
+      
       <ProductsContext.Provider value={loadedProducts}>
         <Routes>
           <Route path="/" element={<Navigate to="/electronics" />} />        

@@ -4,11 +4,10 @@ import {
     AlertTitle,
     AlertDescription,
     Box,
-    CloseButton,
   } from '@chakra-ui/react'
 
 // eslint-disable-next-line react/prop-types
-const CartAddedSuccess = ({alertIsShown, toggleAlert}) => {
+const CartAddedSuccess = ({alertIsShown}) => {
     
     
       return alertIsShown ? (
@@ -20,13 +19,6 @@ const CartAddedSuccess = ({alertIsShown, toggleAlert}) => {
               Item added to your cart!
             </AlertDescription>
           </Box>
-          <CloseButton
-            alignSelf='flex-start'
-            position='relative'
-            right={-1}
-            top={-1}
-            onClick={toggleAlert}
-          />
         </Alert>
       ) : (null)
 }
