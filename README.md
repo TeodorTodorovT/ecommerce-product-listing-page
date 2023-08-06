@@ -35,7 +35,7 @@ The application is built using the following technologies:
 
 Several challenges were encountered during the development of this project:
 
-1. **Mock API Integration:** Integrating and working with a mock API to fetch and display product data posed initial challenges in terms of data handling and synchronization.
+1. **Mock API Integration:** Integrating and working with a mock API to fetch and display product data posed initial challenges in terms of data handling and synchronization. Also, I had to change APIs midway as the original API stopped working.
 
 2. **Responsive Design:** Ensuring a seamless and visually appealing experience across various devices and screen sizes required careful consideration and testing.
 
@@ -46,3 +46,17 @@ Several challenges were encountered during the development of this project:
 5. **UI/UX Consistency:** Achieving a consistent and intuitive user interface and experience across different parts of the application called for continuous design iterations.
 
 Despite these challenges, the project successfully delivers a user-friendly eCommerce product listing page with a range of valuable features.
+
+## How to run the project
+
+Before we start, make sure you have the lattest version of NodeJS installed.
+
+Here are some steps to run the project:
+
+1. Clone the repository: `git clone https://github.com/TeodorTodorovT/ecommerce-product-listing-page.git`
+2. Open a terminal in the projects directory.
+3. Switch to the development branch: `git checkout development`
+4. Install the necessary dependencies: `npm install`
+5. To run the project: `npm run dev` and go to `http://localhost:5173/`
+
+- To build the project: `npm run build`
