@@ -23,4 +23,4 @@ const CartAddedSuccess = ({alertIsShown}) => {
       ) : (null)
 }
 
-export default CartAddedSuccess
+export default CartAddedSuccess;

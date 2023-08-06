@@ -12,6 +12,7 @@ import ProductHeading from './components/ProductHeading/ProductHeading';
 // import CartAddedSuccess from './components/CartAddedSuccess/CartAddedSuccess';
 import SortProducts from './components/SortProducts/SortProducts';
 import Footer from './components/Footer/Footer';
+import FilterProducts from './components/FilterProducts/FilterProducts';
 
 export const ProductsContext = createContext();
 
@@ -22,6 +23,7 @@ function App() {
   const [loadedPage, setLoadedPage] = useState("Electronics");
   const [loadMoreDisabled, setLoadMoreDisabled] = useState(false);
   const [sortMethod, setSortMethod] = useState('');
+  const [filterMethod, setFilterMethod] = useState([]);
   const toast = useToast();
 
   useEffect(() =>{
@@ -44,6 +46,21 @@ function App() {
   },[products, loadedProducts])
 
   useEffect(() => {
+    setLoadedProducts(products?.slice(0, loadedProductsNumber))
+    if(filterMethod.length > 0){
+      if(filterMethod.includes("cheap")){
+        setLoadedProducts(currentProducts => currentProducts.filter(product => product.price < 100))
+      }
+      if (filterMethod.includes("tested")){
+        setLoadedProducts(currentProducts => currentProducts.filter(product => product.rating.count > 200))
+      }
+      if(filterMethod.includes("popular")){
+        setLoadedProducts(currentProducts => currentProducts.filter(product => product.rating.rate > 2.5))
+      }
+    }else {
+      setLoadedProducts(products?.slice(0, loadedProductsNumber))
+    }
+
     if(sortMethod === 'Alphabetical a-z'){
       setLoadedProducts(currentProducts => currentProducts ? [...currentProducts].sort((a,b) => a.title.localeCompare(b.title)) : [])
     }else if(sortMethod === 'Alphabetical z-a'){
@@ -53,7 +70,7 @@ function App() {
     }else if(sortMethod === 'Price descending'){
       setLoadedProducts(currentProducts => currentProducts ? [...currentProducts].sort((a,b) => b.price - a.price) : [])
     }
-  }, [sortMethod, loadedProductsNumber])
+  }, [sortMethod, filterMethod, loadedProductsNumber, products])
 
   const loadMoreHandler = () =>{
     setLoadedProductsNumber(current => current + 4)
@@ -73,6 +90,10 @@ function App() {
     setSortMethod(e.target.textContent)
   }
 
+  const filterHandler = (e) =>{
+    setFilterMethod(e)
+  }
+
   return (
     <>
     <BrowserRouter>
@@ -83,10 +104,10 @@ function App() {
         <Spacer />
         <ProductCounter products={products?.length} loadedProducts={loadedProducts?.length} />
       </Flex>
-      <Flex margin='1rem' justifyContent='right'>
+      <Flex margin='1rem' justifyContent='right' gap='1rem'>
+        <FilterProducts filterHandler={filterHandler}/>
         <SortProducts sortHandler={sortHandler}/>
       </Flex>
-      
       <ProductsContext.Provider value={loadedProducts}>
         <Routes>
           <Route path="/" element={<Navigate to="/electronics" />} />        
