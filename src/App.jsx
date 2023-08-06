@@ -2,14 +2,14 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useState, createContext, useEffect } from "react";
 import api from './services/api'
 import NavBar from "./components/NavBar/NavBar"
-import { Flex, Spacer } from '@chakra-ui/react'
+import { Flex, Spacer, useToast } from '@chakra-ui/react'
 
 import ElectronicsPLP from "./pages/ElectronicsPLP";
 import JewelryPLP from "./pages/JewelryPLP";
 import LoadMore from './components/LoadMore/LoadMore';
 import ProductCounter from './components/ProductCounter/ProductCounter';
 import ProductHeading from './components/ProductHeading/ProductHeading';
-import CartAddedSuccess from './components/CartAddedSuccess/CartAddedSuccess';
+// import CartAddedSuccess from './components/CartAddedSuccess/CartAddedSuccess';
 import SortProducts from './components/SortProducts/SortProducts';
 import Footer from './components/Footer/Footer';
 
@@ -21,8 +21,8 @@ function App() {
   const [loadedProductsNumber, setLoadedProductsNumber] = useState(4);
   const [loadedPage, setLoadedPage] = useState("Electronics");
   const [loadMoreDisabled, setLoadMoreDisabled] = useState(false);
-  const [alertIsShown, setAlertIsShown] = useState(false);
   const [sortMethod, setSortMethod] = useState('');
+  const toast = useToast();
 
   useEffect(() =>{
       api.getProducts(loadedPage).then((res) => {
@@ -60,10 +60,13 @@ function App() {
   }
 
   const toggleAlert = () => {
-    setAlertIsShown(true)
-    setTimeout(() => {
-      setAlertIsShown(false);
-    }, 3000)
+    toast({
+      title: 'Success',
+      description: "Product added to your cart!",
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+    })
   }
    
   const sortHandler = (e) =>{
@@ -74,7 +77,7 @@ function App() {
     <>
     <BrowserRouter>
       <NavBar />
-      <CartAddedSuccess alertIsShown={alertIsShown} toggleAlert={toggleAlert}/>
+      {/* <CartAddedSuccess alertIsShown={alertIsShown} toggleAlert={toggleAlert}/> */}
       <Flex>
         <ProductHeading pageName={loadedPage} />
         <Spacer />
