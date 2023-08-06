@@ -14,9 +14,11 @@ The application offers the following features:
 
 4. **Product Counter:** The number of displayed products is conveniently counted and shown.
 
-5. **Sorting Mechanism:** Users can sort the products based on their preferences.
+5. **Filtering Mechanism:** Users can filter the products based on their preferences.
 
-6. **Load More Button:** To enhance user experience, a "Load More" button is available for seamless browsing.
+6. **Sorting Mechanism:** Users can sort the products based on their preferences.
+
+7. **Load More Button:** To enhance user experience, a "Load More" button is available for seamless browsing.
 
 ## Technologies Used
 
